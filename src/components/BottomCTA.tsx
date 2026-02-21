@@ -62,17 +62,6 @@ export default function BottomCTA() {
           ))}
         </div>
 
-        {/* Price */}
-        <p className="mt-8">
-          <span className="text-text-on-dark-secondary/40 line-through text-sm">
-            EUR 9/mėn.
-          </span>
-          {"  "}
-          <span className="text-2xl font-display font-bold text-text-on-dark">
-            EUR 0. Visam laikui.
-          </span>
-        </p>
-
         {/* Form */}
         <div className="mx-auto mt-8 max-w-md">
           <WaitlistForm id="final-form" variant="dark" />
