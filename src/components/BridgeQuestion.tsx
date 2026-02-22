@@ -3,7 +3,13 @@
 import { useRef } from "react";
 import { useScrollReveal } from "@/hooks/useScrollReveal";
 
-export default function BridgeQuestion({ question }: { question: string }) {
+export default function BridgeQuestion({
+  question,
+  children,
+}: {
+  question: string;
+  children?: React.ReactNode;
+}) {
   const ref = useRef<HTMLDivElement>(null);
   useScrollReveal(ref);
 
@@ -17,6 +23,7 @@ export default function BridgeQuestion({ question }: { question: string }) {
         <p className="font-display text-xl font-medium leading-relaxed tracking-tight text-text-on-dark-secondary md:text-2xl">
           {question}
         </p>
+        {children}
       </div>
     </div>
   );

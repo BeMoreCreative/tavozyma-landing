@@ -5,9 +5,9 @@ import { useScrollReveal } from "@/hooks/useScrollReveal";
 import WaitlistForm from "./WaitlistForm";
 
 const benefits = [
-  "Nemokamas planas ankstyvuosiams nariams",
-  "Neriboti projektai ir patvirtinimai",
-  "Prioritetinė pagalba ir konsultacijos",
+  "Pirmieji nariai — visada nemokamai",
+  "Jūsų profilis — jūsų kontrolėje",
+  "Pradėkite su pirmu darbu per 5 minutes",
 ];
 
 export default function BottomCTA() {
@@ -30,14 +30,13 @@ export default function BottomCTA() {
 
         {/* Headline */}
         <h2 className="mt-8 font-display text-3xl font-bold leading-tight tracking-tight text-text-on-dark md:text-5xl">
-          Pasiruošk įrodyti
+          Pradėkite nuo
           <br />
-          savo darbą.
+          pirmo darbo.
         </h2>
 
         <p className="mt-4 text-base text-text-on-dark-secondary">
-          Sukurkite patikimą profilį. Dalinkitės juo su klientais.
-          Tegul jūsų darbai kalba už save.
+          Vienas darbas. Vienas patvirtinimas. Tai viskas, ko reikia pradžiai.
         </p>
 
         {/* Benefits */}
@@ -68,7 +67,7 @@ export default function BottomCTA() {
         </div>
 
         <p className="mt-4 text-xs text-text-on-dark-secondary/40">
-          Pranešime tik apie produkto paleidimą.
+          Registracija užtrunka 10 sekundžių.
         </p>
       </div>
     </section>

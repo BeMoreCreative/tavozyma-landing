@@ -25,7 +25,7 @@ export default function Header() {
         <span className="font-extrabold text-accent">Žyma</span>
       </span>
       <a
-        href="#hero-form"
+        href="#final-form"
         className="rounded-full border border-accent/30 bg-accent/10 px-5 py-2 text-sm font-medium text-accent transition-all duration-200 hover:bg-accent/20 hover:border-accent/50"
       >
         Užsiregistruoti
