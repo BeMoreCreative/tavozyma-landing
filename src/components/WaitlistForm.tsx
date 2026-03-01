@@ -1,5 +1,11 @@
 "use client";
 
+declare global {
+  interface Window {
+    fbq?: (...args: unknown[]) => void;
+  }
+}
+
 import { useState } from "react";
 import Link from "next/link";
 
@@ -54,6 +60,10 @@ export default function WaitlistForm({
       });
 
       if (!res.ok) throw new Error();
+
+      if (typeof window !== "undefined" && typeof window.fbq === "function") {
+        window.fbq("track", "Lead");
+      }
 
       setState("success");
     } catch {
