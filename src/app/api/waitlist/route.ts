@@ -8,7 +8,7 @@ const redis = new Redis({
 
 export async function POST(request: Request) {
   try {
-    const { email, consent, consentTimestamp, source } = await request.json();
+    const { email, consent, consentTimestamp, source, utmContent } = await request.json();
 
     if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
       return NextResponse.json({ error: "Invalid email" }, { status: 400 });
@@ -27,6 +27,7 @@ export async function POST(request: Request) {
       consent: "true",
       consentTimestamp: consentTimestamp || new Date().toISOString(),
       source: source || "unknown",
+      utmContent: utmContent || "organic",
       registeredAt: new Date().toISOString(),
     });
 

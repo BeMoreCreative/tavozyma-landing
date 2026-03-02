@@ -49,6 +49,11 @@ export default function WaitlistForm({
 
     setState("loading");
 
+    let utmContent = "organic";
+    try {
+      utmContent = new URLSearchParams(window.location.search).get("utm_content") || "organic";
+    } catch {}
+
     try {
       const res = await fetch("/api/waitlist", {
         method: "POST",
@@ -58,6 +63,7 @@ export default function WaitlistForm({
           consent: true,
           consentTimestamp: new Date().toISOString(),
           source: id || "unknown",
+          utmContent,
         }),
       });
 
