@@ -7,9 +7,10 @@ declare global {
 }
 
 import { useState } from "react";
+import { useRouter } from "next/navigation";
 import Link from "next/link";
 
-type FormState = "idle" | "loading" | "success" | "error";
+type FormState = "idle" | "loading" | "error";
 
 export default function WaitlistForm({
   id,
@@ -18,6 +19,7 @@ export default function WaitlistForm({
   id?: string;
   variant?: "dark" | "light";
 }) {
+  const router = useRouter();
   const [email, setEmail] = useState("");
   const [consent, setConsent] = useState(false);
   const [state, setState] = useState<FormState>("idle");
@@ -61,11 +63,7 @@ export default function WaitlistForm({
 
       if (!res.ok) throw new Error();
 
-      if (typeof window !== "undefined" && typeof window.fbq === "function") {
-        window.fbq("track", "Lead");
-      }
-
-      setState("success");
+      router.push("/aciu");
     } catch {
       setState("error");
       setErrorMsg("Kažkas nepavyko. Bandykite dar kartą.");
@@ -73,43 +71,6 @@ export default function WaitlistForm({
   }
 
   const isDark = variant === "dark";
-
-  if (state === "success") {
-    return (
-      <div
-        id={id}
-        className={`rounded-2xl p-6 ${
-          isDark ? "glass" : "bg-accent/5 border border-accent/10"
-        }`}
-      >
-        <div className="flex items-center gap-3">
-          <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-accent">
-            <svg
-              className="h-5 w-5 text-bg-primary"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke="currentColor"
-              strokeWidth={2.5}
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                d="M5 13l4 4L19 7"
-              />
-            </svg>
-          </div>
-          <div>
-            <p className={`text-lg font-semibold ${isDark ? "text-accent" : "text-accent"}`}>
-              Užregistruota!
-            </p>
-            <p className={`text-sm ${isDark ? "text-text-on-dark-secondary" : "text-text-on-light-secondary"}`}>
-              Pranešime, kai būsime pasiruošę.
-            </p>
-          </div>
-        </div>
-      </div>
-    );
-  }
 
   return (
     <form id={id} onSubmit={handleSubmit} className="w-full">
