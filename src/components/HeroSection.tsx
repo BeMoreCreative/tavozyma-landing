@@ -14,7 +14,7 @@ export default function HeroSection() {
 
         {/* Headline */}
         <h1 className="mt-8 font-display text-4xl font-bold leading-[1.1] tracking-tight md:text-6xl lg:text-7xl hero-shimmer">
-          Jūsų atlikti darbai.
+          Tavo atlikti darbai.
           <br />
           Patvirtinti klientų.
         </h1>
