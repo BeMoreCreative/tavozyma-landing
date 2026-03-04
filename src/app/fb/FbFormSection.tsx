@@ -176,15 +176,14 @@ export default function FbFormSection({
                     className="mt-0.5 h-4 w-4 shrink-0 rounded border appearance-none cursor-pointer transition-all duration-200 border-white/20 bg-white/[0.06] checked:bg-accent checked:border-accent"
                   />
                   <span className="text-xs leading-relaxed text-text-on-dark-secondary/60">
-                    Sutinku su{" "}
+                    Jokio spam&apos;o. Informuosime tik kai produktas bus paruoštas.{" "}
                     <Link
                       href="/privatumo-politika"
                       target="_blank"
-                      className="text-accent underline underline-offset-2 hover:text-accent-hover transition-colors duration-200"
+                      className="text-text-on-dark-secondary/40 underline underline-offset-2 hover:text-text-on-dark-secondary/60 transition-colors duration-200"
                     >
-                      privatumo politika
+                      Privatumo politika
                     </Link>
-                    . El. paštas bus naudojamas tik informuoti apie TavoŽyma.
                   </span>
                 </label>
 

@@ -82,9 +82,7 @@ export default async function FbPage({
 
           <div className="mt-8 flex items-center justify-center gap-2 text-sm text-text-on-dark-secondary">
             <span className="inline-block h-2 w-2 rounded-full bg-accent animate-pulse-dot" />
-            {waitlistCount >= 5
-              ? `Jau prisijungė ${waitlistCount}+ žmonių`
-              : "Pirmieji nariai jau registruojasi"}
+            Pirmieji nariai jau registruojasi
           </div>
         </div>
       </section>
@@ -138,30 +136,89 @@ export default async function FbPage({
             Klientas patvirtina — tu gauni įrodymą.
           </p>
 
-          {/* Static profile card mockup */}
-          <div className="mt-10 mx-auto max-w-sm rounded-2xl border border-border-dark bg-bg-card p-6 text-left shadow-[var(--shadow-card)]">
-            <div className="flex items-center gap-3">
-              <div className="flex h-12 w-12 items-center justify-center rounded-full bg-accent/15 text-lg font-bold text-accent">
-                JP
-              </div>
-              <div>
-                <p className="font-display font-semibold text-text-on-dark">Jonas P.</p>
-                <p className="text-sm text-text-on-dark-secondary">Statybų meistras &middot; Vilnius</p>
-              </div>
-            </div>
+          {/* Phone mockup matching ad creative */}
+          <div className="mt-10 mx-auto max-w-[280px]">
+            {/* Phone frame */}
+            <div className="relative rounded-[2rem] border-[3px] border-white/15 bg-white shadow-2xl shadow-black/40 overflow-hidden">
+              {/* Notch */}
+              <div className="mx-auto mt-2 h-5 w-24 rounded-full bg-black" />
 
-            <div className="mt-5 space-y-3">
-              <div className="rounded-lg border border-border-dark bg-bg-secondary/50 px-4 py-3">
-                <p className="text-sm font-medium text-text-on-dark">✅ Vonios remontas <span className="text-amber-400">★★★★★</span></p>
-                <p className="mt-1 text-xs text-text-on-dark-secondary/60">Patvirtino: Rūta J.</p>
-              </div>
-              <div className="rounded-lg border border-border-dark bg-bg-secondary/50 px-4 py-3">
-                <p className="text-sm font-medium text-text-on-dark">✅ Elektros instaliacija <span className="text-amber-400">★★★★</span><span className="text-text-on-dark-secondary/30">★</span></p>
-                <p className="mt-1 text-xs text-text-on-dark-secondary/60">Patvirtino: +370 6*****12 &middot; SMS</p>
-              </div>
-              <div className="rounded-lg border border-border-dark bg-bg-secondary/50 px-4 py-3">
-                <p className="text-sm font-medium text-text-on-dark">✅ Apšvietimo montavimas</p>
-                <p className="mt-1 text-xs text-text-on-dark-secondary/60">Patvirtino: marius.st***@gmail.com</p>
+              {/* Screen content */}
+              <div className="px-4 pt-4 pb-5">
+                {/* Profile header */}
+                <div className="flex items-center gap-3">
+                  <div className="relative h-12 w-12 shrink-0 rounded-full bg-gradient-to-br from-blue-400 to-blue-600 flex items-center justify-center text-white text-lg font-bold">
+                    TK
+                  </div>
+                  <div className="text-left">
+                    <p className="flex items-center gap-1.5 font-semibold text-gray-900 text-[15px]">
+                      Tomas Kazlauskas
+                      <svg className="h-4 w-4 text-blue-500" viewBox="0 0 20 20" fill="currentColor"><path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.857-9.809a.75.75 0 00-1.214-.882l-3.483 4.79-1.88-1.88a.75.75 0 10-1.06 1.061l2.5 2.5a.75.75 0 001.137-.089l4-5.5z" clipRule="evenodd" /></svg>
+                    </p>
+                    <p className="text-xs text-gray-500">Elektrikas &middot; Kaunas</p>
+                  </div>
+                </div>
+
+                {/* Stats badges */}
+                <div className="mt-3 flex gap-1.5">
+                  {["15+ m.", "520+ darbų", "83 patv."].map((stat) => (
+                    <span key={stat} className="rounded-full border border-gray-200 bg-gray-50 px-2.5 py-0.5 text-[10px] font-medium text-gray-700">
+                      {stat}
+                    </span>
+                  ))}
+                </div>
+
+                {/* Section header */}
+                <div className="mt-4 flex items-center gap-1.5">
+                  <svg className="h-3.5 w-3.5 text-green-600" viewBox="0 0 20 20" fill="currentColor"><path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.857-9.809a.75.75 0 00-1.214-.882l-3.483 4.79-1.88-1.88a.75.75 0 10-1.06 1.061l2.5 2.5a.75.75 0 001.137-.089l4-5.5z" clipRule="evenodd" /></svg>
+                  <span className="text-[10px] font-semibold uppercase tracking-wider text-gray-500">Patvirtinti darbai</span>
+                </div>
+
+                {/* Work items */}
+                <div className="mt-2.5 space-y-2">
+                  {/* Featured item */}
+                  <div className="rounded-xl border border-gray-100 bg-white p-3 shadow-sm ring-1 ring-black/[0.03]">
+                    <p className="text-[13px] font-semibold text-gray-900">Šildymo sistemos montavimas</p>
+                    <div className="mt-1 flex items-center gap-1">
+                      {[1,2,3,4,5].map((i) => (
+                        <svg key={i} className="h-3 w-3 text-amber-400" viewBox="0 0 20 20" fill="currentColor"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" /></svg>
+                      ))}
+                      <span className="ml-1 text-[10px] text-gray-400">Kaunas</span>
+                    </div>
+                    <div className="mt-2 flex items-center gap-1.5">
+                      <svg className="h-3 w-3 text-green-600" viewBox="0 0 20 20" fill="currentColor"><path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.857-9.809a.75.75 0 00-1.214-.882l-3.483 4.79-1.88-1.88a.75.75 0 10-1.06 1.061l2.5 2.5a.75.75 0 001.137-.089l4-5.5z" clipRule="evenodd" /></svg>
+                      <span className="text-[10px] text-gray-500">Patvirtino: Rūta J. &middot;</span>
+                      <svg className="h-3 w-3 text-blue-600" viewBox="0 0 24 24" fill="currentColor"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z" /></svg>
+                      <span className="rounded-full bg-green-100 px-1.5 py-0.5 text-[9px] font-medium text-green-700">Patvirtintas darbas</span>
+                    </div>
+                  </div>
+
+                  {/* Secondary items */}
+                  <div className="rounded-xl border border-gray-100 bg-white p-3">
+                    <p className="text-[13px] font-medium text-gray-900">Elektros instaliacijos atnaujinimas</p>
+                    <div className="mt-1 flex items-center gap-1">
+                      {[1,2,3,4].map((i) => (
+                        <svg key={i} className="h-3 w-3 text-amber-400" viewBox="0 0 20 20" fill="currentColor"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" /></svg>
+                      ))}
+                      <svg className="h-3 w-3 text-gray-200" viewBox="0 0 20 20" fill="currentColor"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" /></svg>
+                      <span className="ml-1 text-[10px] text-gray-400">Vilnius</span>
+                    </div>
+                    <div className="mt-1.5 flex items-center gap-1.5">
+                      <svg className="h-3 w-3 text-green-600" viewBox="0 0 20 20" fill="currentColor"><path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.857-9.809a.75.75 0 00-1.214-.882l-3.483 4.79-1.88-1.88a.75.75 0 10-1.06 1.061l2.5 2.5a.75.75 0 001.137-.089l4-5.5z" clipRule="evenodd" /></svg>
+                      <span className="text-[10px] text-gray-500">Patvirtino: +370 6** ***12 &middot;</span>
+                      <span className="inline-flex items-center gap-0.5 rounded-full bg-green-50 px-1.5 py-0.5 text-[9px] font-medium text-green-700">📱 SMS</span>
+                    </div>
+                  </div>
+
+                  <div className="rounded-xl border border-gray-100 bg-white p-3">
+                    <p className="text-[13px] font-medium text-gray-900">Apšvietimo montavimas</p>
+                    <div className="mt-1.5 flex items-center gap-1.5">
+                      <svg className="h-3 w-3 text-green-600" viewBox="0 0 20 20" fill="currentColor"><path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.857-9.809a.75.75 0 00-1.214-.882l-3.483 4.79-1.88-1.88a.75.75 0 10-1.06 1.061l2.5 2.5a.75.75 0 001.137-.089l4-5.5z" clipRule="evenodd" /></svg>
+                      <span className="text-[10px] text-gray-500">marius.st***@gmail.com &middot;</span>
+                      <span className="text-[10px] text-gray-400">✉️</span>
+                    </div>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
