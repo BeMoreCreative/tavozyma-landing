@@ -25,14 +25,14 @@ export default function FbNav() {
           : "bg-transparent"
       }`}
     >
-      <span className={`${nunito.className} text-[26px] tracking-[-0.02em] text-text-on-dark`}>
+      <span className={`${nunito.className} text-[22px] tracking-[-0.02em] text-text-on-dark sm:text-[26px]`}>
         <span className="font-semibold">Tavo</span>
         <span className="font-extrabold text-accent">Žyma</span>
       </span>
       <a
         href="#registracija"
         onClick={smoothScroll}
-        className="rounded-full border border-accent/30 bg-accent/10 px-5 py-2 text-sm font-medium text-accent transition-all duration-200 hover:bg-accent/20 hover:border-accent/50"
+        className="rounded-full border border-accent/30 bg-accent/10 px-3.5 py-1.5 text-xs font-medium text-accent transition-all duration-200 hover:bg-accent/20 hover:border-accent/50 sm:px-5 sm:py-2 sm:text-sm"
       >
         Registruotis nemokamai
       </a>

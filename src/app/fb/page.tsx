@@ -57,13 +57,13 @@ export default async function FbPage({
             Skaitmeninis darbų pasas
           </span>
 
-          <h1 className="hero-shimmer mt-5 font-display text-4xl font-bold tracking-tight md:text-5xl lg:text-6xl leading-[1.1]">
+          <h1 className="hero-shimmer mt-5 font-display text-3xl font-bold tracking-tight sm:text-4xl md:text-5xl lg:text-6xl leading-[1.1]">
             Tavo atlikti darbai.
             <br />
             Patvirtinti klientų.
           </h1>
 
-          <p className="mt-5 text-lg text-text-on-dark-secondary md:text-xl max-w-lg mx-auto">
+          <p className="mt-5 text-base text-text-on-dark-secondary sm:text-lg md:text-xl max-w-lg mx-auto">
             Profilis, kuriame kiekvienas tavo darbas užfiksuotas ir patvirtintas tikro kliento. Kaip
             rekomendacija iš lūpų į lūpas — tik internete.
           </p>
@@ -115,7 +115,7 @@ export default async function FbPage({
             ].map((item, i) => (
               <div
                 key={i}
-                className="glass flex items-center gap-4 rounded-xl px-5 py-4 text-base text-text-on-dark"
+                className="glass flex items-center gap-3 rounded-xl px-4 py-3.5 text-sm text-text-on-dark sm:gap-4 sm:px-5 sm:py-4 sm:text-base"
               >
                 <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-red-500/10 text-red-400">
                   {item.icon}
@@ -268,7 +268,7 @@ export default async function FbPage({
             &ldquo;Kaip patikrinti meistro kvalifikaciją?&rdquo;
           </h2>
 
-          <div className="mt-8 flex justify-center gap-6 text-sm text-text-on-dark-secondary">
+          <div className="mt-8 flex justify-center gap-4 text-xs text-text-on-dark-secondary sm:gap-6 sm:text-sm">
             <span className="flex flex-col items-center gap-1">
               <span className="text-2xl font-bold text-text-on-dark">64</span>
               komentarai
@@ -338,7 +338,7 @@ export default async function FbPage({
       <FbFormSection utmParams={utmParams} initialCount={waitlistCount} />
 
       {/* Footer */}
-      <footer className="border-t border-border-dark bg-bg-primary px-6 py-8">
+      <footer className="border-t border-border-dark bg-bg-primary px-6 pt-8 pb-24 md:pb-8">
         <div className="mx-auto max-w-2xl text-center text-sm text-text-on-dark-secondary/60">
           <span className={nunito.className}>
             <span className="font-semibold">Tavo</span>
