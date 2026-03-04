@@ -260,29 +260,23 @@ export default async function FbPage({
       {/* Social Proof */}
       <section className="bg-bg-secondary px-6 py-16 md:py-20">
         <div className="mx-auto max-w-2xl text-center">
-          <p className="text-sm font-medium text-text-on-dark-secondary/60 uppercase tracking-wider">
-            Paklausėme meistrų grupėje:
-          </p>
-          <h2 className="mt-4 font-display text-2xl font-bold text-text-on-dark md:text-3xl">
-            &ldquo;Kaip patikrinti meistro kvalifikaciją?&rdquo;
+          <h2 className="font-display text-2xl font-bold text-text-on-dark md:text-3xl">
+            Štai ką klausia tavo būsimi klientai
           </h2>
 
-          <div className="mt-8 flex justify-center gap-4 text-xs text-text-on-dark-secondary sm:gap-6 sm:text-sm">
-            <span className="flex flex-col items-center gap-1">
-              <span className="text-2xl font-bold text-text-on-dark">64</span>
-              komentarai
-            </span>
-            <span className="flex flex-col items-center gap-1">
-              <span className="text-2xl font-bold text-text-on-dark">2 val</span>
-              per tiek laiko
-            </span>
-            <span className="flex flex-col items-center gap-1">
-              <span className="text-2xl font-bold text-text-on-dark">#1</span>
-              problema
-            </span>
+          <div className="mt-8">
+            <img
+              src="/images/fb-post-screenshot.png"
+              alt="Facebook įrašas: klientas klausia kaip patikrinti meistro kvalifikaciją — 101 komentaras"
+              loading="lazy"
+              className="mx-auto max-w-[480px] w-full rounded-xl shadow-lg"
+            />
+            <p className="mt-3 text-sm text-text-on-dark-secondary/60">
+              Tikras įrašas iš Facebook grupės &middot; 101 komentaras
+            </p>
           </div>
 
-          <div className="mt-10 glass rounded-xl px-6 py-5 text-left">
+          <div className="mt-8 glass rounded-xl px-6 py-5 text-left">
             <p className="text-base italic text-text-on-dark leading-relaxed">
               &ldquo;Klientų numerių nedalinsiu ir svetimų žmonių po jų namus nevežiosiu.&rdquo;
             </p>
