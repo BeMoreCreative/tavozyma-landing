@@ -96,16 +96,30 @@ export default async function FbPage({
 
           <div className="mt-10 space-y-4">
             {[
-              { emoji: "📱", text: "Klientas prašo darbų pavyzdžių — siunti nuotraukas iš galerijos" },
-              { emoji: "🔒", text: "Nori parodyti buvusius projektus — bet kontaktų dalinti negali" },
-              { emoji: "😤", text: "Dirbi 10+ metų — bet internete apie tave nėra nieko" },
-              { emoji: "🤷", text: "Naujas klientas klausia rekomendacijų — neturi ką parodyti" },
-            ].map((item) => (
+              {
+                icon: <svg className="h-5 w-5" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" d="M2.25 15.75l5.159-5.159a2.25 2.25 0 013.182 0l5.159 5.159m-1.5-1.5l1.409-1.409a2.25 2.25 0 013.182 0l2.909 2.909M3.75 21h16.5A2.25 2.25 0 0022.5 18.75V5.25A2.25 2.25 0 0020.25 3H3.75A2.25 2.25 0 001.5 5.25v13.5A2.25 2.25 0 003.75 21z" /></svg>,
+                text: "Klientas prašo darbų pavyzdžių — siunti nuotraukas iš galerijos",
+              },
+              {
+                icon: <svg className="h-5 w-5" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" d="M18.364 18.364A9 9 0 005.636 5.636m12.728 12.728A9 9 0 015.636 5.636m12.728 12.728L5.636 5.636" /></svg>,
+                text: "Nori parodyti buvusius projektus — bet kontaktų dalinti negali",
+              },
+              {
+                icon: <svg className="h-5 w-5" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" d="M12 6v6h4.5m4.5 0a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>,
+                text: "Dirbi 10+ metų — bet internete apie tave nėra nieko",
+              },
+              {
+                icon: <svg className="h-5 w-5" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" d="M9.879 7.519c1.171-1.025 3.071-1.025 4.242 0 1.172 1.025 1.172 2.687 0 3.712-.203.179-.43.326-.67.442-.745.361-1.45.999-1.45 1.827v.75M21 12a9 9 0 11-18 0 9 9 0 0118 0zm-9 5.25h.008v.008H12v-.008z" /></svg>,
+                text: "Naujas klientas klausia rekomendacijų — neturi ką parodyti",
+              },
+            ].map((item, i) => (
               <div
-                key={item.emoji}
-                className="glass rounded-xl px-5 py-4 text-base text-text-on-dark"
+                key={i}
+                className="glass flex items-center gap-4 rounded-xl px-5 py-4 text-base text-text-on-dark"
               >
-                <span className="mr-3">{item.emoji}</span>
+                <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-red-500/10 text-red-400">
+                  {item.icon}
+                </span>
                 {item.text}
               </div>
             ))}
@@ -294,17 +308,17 @@ export default async function FbPage({
           <div className="grid gap-5 md:grid-cols-3">
             {[
               {
-                emoji: "✅",
+                icon: <svg className="h-6 w-6" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" d="M9 12.75L11.25 15 15 9.75m-3-7.036A11.959 11.959 0 013.598 6 11.99 11.99 0 003 9.749c0 5.592 3.824 10.29 9 11.623 5.176-1.332 9-6.03 9-11.622 0-1.31-.21-2.571-.598-3.751h-.152c-3.196 0-6.1-1.248-8.25-3.285z" /></svg>,
                 title: "Klientas pats patvirtina",
                 description: "Nereikia dalinti kontaktų. Klientas gauna nuorodą ir patvirtina vienu paspaudimu.",
               },
               {
-                emoji: "🔒",
+                icon: <svg className="h-6 w-6" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" d="M3.75 12h16.5m-16.5 3.75h16.5M3.75 19.5h16.5M5.625 4.5h12.75a1.875 1.875 0 010 3.75H5.625a1.875 1.875 0 010-3.75z" /></svg>,
                 title: "Nekeičiama istorija",
                 description: "Patvirtintų darbų negalima redaguoti ar paslėpti. Kaip banko išrašas — tik darbams.",
               },
               {
-                emoji: "📲",
+                icon: <svg className="h-6 w-6" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" d="M7.217 10.907a2.25 2.25 0 100 2.186m0-2.186c.18.324.283.696.283 1.093s-.103.77-.283 1.093m0-2.186l9.566-5.314m-9.566 7.5l9.566 5.314m0 0a2.25 2.25 0 103.935 2.186 2.25 2.25 0 00-3.935-2.186zm0-12.814a2.25 2.25 0 103.933-2.185 2.25 2.25 0 00-3.933 2.185z" /></svg>,
                 title: "Siųsk nuorodą klientui",
                 description: "Naujas klientas klausia pavyzdžių? Siųsk profilį. Viskas vienoje vietoje.",
               },
@@ -313,7 +327,9 @@ export default async function FbPage({
                 key={card.title}
                 className="glass rounded-xl p-6 text-center"
               >
-                <p className="text-3xl">{card.emoji}</p>
+                <div className="mx-auto flex h-12 w-12 items-center justify-center rounded-xl bg-accent/10 text-accent">
+                  {card.icon}
+                </div>
                 <h3 className="mt-3 font-display text-base font-semibold text-text-on-dark">
                   {card.title}
                 </h3>
