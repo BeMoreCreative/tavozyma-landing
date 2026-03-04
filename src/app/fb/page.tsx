@@ -53,11 +53,11 @@ export default async function FbPage({
       {/* Hero */}
       <section className="relative overflow-hidden bg-bg-primary px-6 pt-20 pb-16 md:pt-28 md:pb-20">
         <div className="mx-auto max-w-2xl text-center hero-stagger">
-          <span className="inline-flex items-center gap-2 rounded-full border border-accent/20 bg-accent/5 px-4 py-1.5 text-xs font-medium text-accent">
-            Nemokama &middot; Užtrunka 10 sek.
+          <span className="inline-flex items-center rounded-full border border-accent/30 bg-accent/10 px-3 py-1 text-[13px] tracking-wide text-accent">
+            Skaitmeninis darbų pasas
           </span>
 
-          <h1 className="hero-shimmer mt-6 font-display text-4xl font-bold tracking-tight md:text-5xl lg:text-6xl leading-[1.1]">
+          <h1 className="hero-shimmer mt-5 font-display text-4xl font-bold tracking-tight md:text-5xl lg:text-6xl leading-[1.1]">
             Tavo atlikti darbai.
             <br />
             Patvirtinti klientų.
@@ -75,8 +75,8 @@ export default async function FbPage({
             >
               Užsiregistruoti nemokamai
             </a>
-            <p className="mt-3 text-sm text-text-on-dark-secondary/50">
-              Jokių įsipareigojimų. Be banko kortelės.
+            <p className="mt-2.5 text-[13px] text-text-on-dark-secondary/50">
+              Nemokama &middot; Be įsipareigojimų
             </p>
           </div>
 
