@@ -26,7 +26,6 @@ export default function FbFormSection({
   initialCount: number;
 }) {
   const [email, setEmail] = useState("");
-  const [consent, setConsent] = useState(false);
   const [formState, setFormState] = useState<FormState>("idle");
   const [shakeError, setShakeError] = useState(false);
   const [errorMsg, setErrorMsg] = useState("");
@@ -66,11 +65,6 @@ export default function FbFormSection({
 
     if (!isValidEmail(email)) {
       triggerShake("Įvesk galiojantį el. paštą");
-      return;
-    }
-
-    if (!consent) {
-      triggerShake("Turite sutikti su privatumo politika.");
       return;
     }
 
@@ -161,31 +155,22 @@ export default function FbFormSection({
                   <button
                     type="submit"
                     disabled={formState === "loading"}
-                    className="whitespace-nowrap rounded-xl sm:rounded-l-none bg-accent px-6 py-3.5 text-sm font-semibold text-bg-primary transition-all duration-200 hover:bg-accent-hover hover:scale-[1.02] active:scale-[0.98] disabled:opacity-50"
+                    className="w-full sm:w-auto whitespace-nowrap rounded-xl sm:rounded-l-none bg-accent px-6 py-3.5 text-sm font-semibold text-bg-primary transition-all duration-200 hover:bg-accent-hover hover:scale-[1.02] active:scale-[0.98] disabled:opacity-50"
                   >
                     {formState === "loading" ? "Registruojama..." : "Užsiregistruoti"}
                   </button>
                 </div>
 
-                {/* Privacy consent */}
-                <label className="mt-3 flex items-start gap-2.5 cursor-pointer group text-left">
-                  <input
-                    type="checkbox"
-                    checked={consent}
-                    onChange={(e) => setConsent(e.target.checked)}
-                    className="mt-0.5 h-4 w-4 shrink-0 rounded border appearance-none cursor-pointer transition-all duration-200 border-white/20 bg-white/[0.06] checked:bg-accent checked:border-accent"
-                  />
-                  <span className="text-xs leading-relaxed text-text-on-dark-secondary/60">
-                    Jokio spam&apos;o. Informuosime tik kai produktas bus paruoštas.{" "}
-                    <Link
-                      href="/privatumo-politika"
-                      target="_blank"
-                      className="text-text-on-dark-secondary/40 underline underline-offset-2 hover:text-text-on-dark-secondary/60 transition-colors duration-200"
-                    >
-                      Privatumo politika
-                    </Link>
-                  </span>
-                </label>
+                <p className="mt-3 text-xs leading-relaxed text-text-on-dark-secondary/60 text-center">
+                  Jokio spam&apos;o. Informuosime tik kai produktas bus paruoštas.{" "}
+                  <Link
+                    href="/privatumo-politika"
+                    target="_blank"
+                    className="text-text-on-dark-secondary/40 underline underline-offset-2 hover:text-text-on-dark-secondary/60 transition-colors duration-200"
+                  >
+                    Privatumo politika
+                  </Link>
+                </p>
 
                 {errorMsg && (
                   <p id={errorId} className="mt-2 text-sm text-error">
