@@ -9,15 +9,23 @@ import CookieNotice from "@/components/CookieNotice";
 export const dynamic = "force-dynamic";
 
 export const metadata: Metadata = {
-  title: "TavoŽyma — Tavo atlikti darbai, patvirtinti klientų",
+  title: "TavoŽyma — Įrodyk savo darbą. Laimėk klientus.",
   description:
-    "Sukurk profilį, kur kiekvienas tavo darbas patvirtintas tikro kliento.",
+    "Sukurk profilį, kuriame kiekvienas darbas patvirtintas tikro kliento. Siųsk nuorodą vietoj nuotraukų iš galerijos.",
   robots: "noindex, nofollow",
   openGraph: {
-    title: "TavoŽyma — Tavo darbai, patvirtinti klientų",
-    description: "Skaitmeninis darbų pasas. Nemokama registracija.",
+    title: "TavoŽyma — Įrodyk savo darbą. Laimėk klientus.",
+    description:
+      "Sukurk profilį, kuriame kiekvienas darbas patvirtintas tikro kliento. Siųsk nuorodą vietoj nuotraukų iš galerijos.",
     type: "website",
     locale: "lt_LT",
+    siteName: "TavoŽyma",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "TavoŽyma — Įrodyk savo darbą. Laimėk klientus.",
+    description:
+      "Sukurk profilį, kuriame kiekvienas darbas patvirtintas tikro kliento.",
   },
 };
 
