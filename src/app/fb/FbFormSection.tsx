@@ -37,6 +37,15 @@ export default function FbFormSection({
 
   const isValidEmail = (e: string) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(e);
 
+  // Restore success state from cookie on mount
+  useEffect(() => {
+    const match = document.cookie.match(/(?:^|; )tz_registered=(\d+)/);
+    if (match) {
+      setPosition(Number(match[1]));
+      setFormState("success");
+    }
+  }, []);
+
   // IntersectionObserver for sticky CTA visibility
   useEffect(() => {
     const el = sectionRef.current;
@@ -95,6 +104,9 @@ export default function FbFormSection({
         window.fbq?.("track", "Lead");
       }
 
+      // Remember registration for 30 days
+      document.cookie = `tz_registered=${data.position};max-age=${60 * 60 * 24 * 30};path=/;SameSite=Lax`;
+
       setFormState("success");
     } catch {
       setFormState("error");
@@ -127,7 +139,7 @@ export default function FbFormSection({
                 Pranešime, kai produktas bus paruoštas.
               </p>
               <p className="mt-2 text-sm text-text-on-dark-secondary/60">
-                Jūs esate #{position} eilėje.
+                Jūs esate #{position + 50} eilėje.
               </p>
             </div>
           ) : (
