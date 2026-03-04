@@ -264,25 +264,28 @@ export default async function FbPage({
             Štai ką klausia tavo būsimi klientai
           </h2>
 
-          <div className="mt-8 mx-auto max-w-lg rounded-2xl bg-white p-4 pb-3 shadow-lg sm:p-5 sm:pb-4">
+          <div className="mt-8 mx-auto max-w-lg rounded-2xl bg-white p-4 shadow-lg sm:p-5 text-left">
             {/* FB post header */}
             <div className="flex items-center gap-2.5">
               <div className="h-9 w-9 shrink-0 rounded-full bg-gradient-to-br from-gray-300 to-gray-400" />
-              <div className="text-left">
-                <p className="text-sm font-semibold text-gray-900">Facebook grupė</p>
-                <p className="text-[11px] text-gray-500">Meistrų ir statybininkų grupė</p>
+              <div>
+                <p className="text-sm font-semibold text-gray-900">Meistrų ir statybininkų grupė</p>
+                <p className="text-[11px] text-gray-500">Facebook grupė</p>
               </div>
             </div>
             {/* Post text */}
-            <div className="mt-3">
-              <img
-                src="/images/fb-post-screenshot.png"
-                alt="Facebook įrašas: klientas klausia kaip patikrinti meistro kvalifikaciją — 101 komentaras"
-                loading="lazy"
-                className="w-full"
-              />
+            <p className="mt-3 text-[14px] leading-relaxed text-gray-900">
+              Sveiki, gal žinote kokiais būdais būtų galima patikrinti meistro kvalifikaciją? Kur būtų galima pamatyti atsiliepimus arba atliktų darbų kokybės įvertinimą? Ar darbą atliko iki galo ir pan.? Kokia yra praktika? Įsirenginėjame 120kv.m. namą, norime pataikyti ant kokybiškų meistrų, ačiū
+            </p>
+            {/* Reactions & comments bar */}
+            <div className="mt-3 flex items-center justify-between border-t border-gray-100 pt-2.5">
+              <div className="flex items-center gap-1">
+                <span className="text-sm">😂👍</span>
+                <span className="text-xs text-gray-500">18</span>
+              </div>
+              <span className="text-xs text-gray-500">101 komentaras</span>
             </div>
-            <p className="mt-2 text-center text-xs text-gray-400">
+            <p className="mt-2 text-center text-[11px] text-gray-400">
               Tikras įrašas iš Facebook grupės
             </p>
           </div>
