@@ -264,15 +264,26 @@ export default async function FbPage({
             Štai ką klausia tavo būsimi klientai
           </h2>
 
-          <div className="mt-8">
-            <img
-              src="/images/fb-post-screenshot.png"
-              alt="Facebook įrašas: klientas klausia kaip patikrinti meistro kvalifikaciją — 101 komentaras"
-              loading="lazy"
-              className="mx-auto max-w-[480px] w-full rounded-xl shadow-lg"
-            />
-            <p className="mt-3 text-sm text-text-on-dark-secondary/60">
-              Tikras įrašas iš Facebook grupės &middot; 101 komentaras
+          <div className="mt-8 mx-auto max-w-lg rounded-2xl bg-white p-4 pb-3 shadow-lg sm:p-5 sm:pb-4">
+            {/* FB post header */}
+            <div className="flex items-center gap-2.5">
+              <div className="h-9 w-9 shrink-0 rounded-full bg-gradient-to-br from-gray-300 to-gray-400" />
+              <div className="text-left">
+                <p className="text-sm font-semibold text-gray-900">Facebook grupė</p>
+                <p className="text-[11px] text-gray-500">Meistrų ir statybininkų grupė</p>
+              </div>
+            </div>
+            {/* Post text */}
+            <div className="mt-3">
+              <img
+                src="/images/fb-post-screenshot.png"
+                alt="Facebook įrašas: klientas klausia kaip patikrinti meistro kvalifikaciją — 101 komentaras"
+                loading="lazy"
+                className="w-full"
+              />
+            </div>
+            <p className="mt-2 text-center text-xs text-gray-400">
+              Tikras įrašas iš Facebook grupės
             </p>
           </div>
 
