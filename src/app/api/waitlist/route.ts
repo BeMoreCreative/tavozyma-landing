@@ -48,6 +48,28 @@ export async function POST(request: Request) {
   }
 }
 
+export async function PATCH(request: Request) {
+  try {
+    const { email, specialty, specialtyOther } = await request.json();
+
+    if (!email) {
+      return NextResponse.json({ error: "Email required" }, { status: 400 });
+    }
+
+    const fields: Record<string, string> = { specialty: specialty || "" };
+    if (specialtyOther) {
+      fields.specialtyOther = specialtyOther.slice(0, 50);
+    }
+
+    await redis.hset(`waitlist:meta:${email}`, fields);
+
+    return NextResponse.json({ success: true });
+  } catch (err) {
+    console.error("Specialty update error:", err);
+    return NextResponse.json({ error: "Server error" }, { status: 500 });
+  }
+}
+
 export async function GET() {
   try {
     const count = await redis.scard("waitlist:emails");

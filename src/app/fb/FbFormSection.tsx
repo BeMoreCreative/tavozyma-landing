@@ -31,6 +31,9 @@ export default function FbFormSection({
   const [errorMsg, setErrorMsg] = useState("");
   const [position, setPosition] = useState(initialCount);
   const [showSticky, setShowSticky] = useState(false);
+  const [selectedSpecialty, setSelectedSpecialty] = useState<string | null>(null);
+  const [otherText, setOtherText] = useState("");
+  const [specialtySaved, setSpecialtySaved] = useState(false);
 
   const sectionRef = useRef<HTMLElement>(null);
   const errorId = "form-error";
@@ -43,6 +46,13 @@ export default function FbFormSection({
     if (match) {
       setPosition(Number(match[1]));
       setFormState("success");
+    }
+    const emailMatch = document.cookie.match(/(?:^|; )tz_email=([^;]+)/);
+    if (emailMatch) {
+      setEmail(decodeURIComponent(emailMatch[1]));
+    }
+    if (document.cookie.includes("tz_specialty=1")) {
+      setSpecialtySaved(true);
     }
   }, []);
 
@@ -106,6 +116,7 @@ export default function FbFormSection({
 
       // Remember registration for 30 days
       document.cookie = `tz_registered=${data.position};max-age=${60 * 60 * 24 * 30};path=/;SameSite=Lax`;
+      document.cookie = `tz_email=${encodeURIComponent(email)};max-age=${60 * 60 * 24 * 30};path=/;SameSite=Lax`;
 
       setFormState("success");
     } catch {
@@ -133,14 +144,72 @@ export default function FbFormSection({
             <div className="animate-fade-slide-up">
               <p className="text-4xl">✅</p>
               <h2 className="mt-4 font-display text-2xl font-bold text-text-on-dark md:text-3xl">
-                Užsiregistravote!
+                Užsiregistravote! Jūs esate #{position + 50} eilėje.
               </h2>
               <p className="mt-3 text-text-on-dark-secondary">
-                Pranešime, kai produktas bus paruoštas.
+                Pranešime, kai bus paruošta.
               </p>
-              <p className="mt-2 text-sm text-text-on-dark-secondary/60">
-                Jūs esate #{position + 50} eilėje.
-              </p>
+
+              {/* Specialty question */}
+              {!specialtySaved ? (
+                <div className="mt-8">
+                  <p className="text-base font-medium text-text-on-dark">
+                    Dar vienas klausimas — kokia tavo specialybė?
+                  </p>
+                  <div className="mt-4 flex flex-wrap justify-center gap-2">
+                    {["Elektrikas", "Santechnikas", "Statybininkas", "Apdailininkas", "Stogdengys"].map((s) => (
+                      <button
+                        key={s}
+                        onClick={() => {
+                          setSelectedSpecialty(s);
+                          setSpecialtySaved(true);
+                          document.cookie = `tz_specialty=1;max-age=${60 * 60 * 24 * 30};path=/;SameSite=Lax`;
+                          fetch("/api/waitlist", {
+                            method: "PATCH",
+                            headers: { "Content-Type": "application/json" },
+                            body: JSON.stringify({ email, specialty: s }),
+                          });
+                        }}
+                        className={`rounded-lg border px-4 py-2.5 text-sm font-medium transition-all duration-200 ${
+                          selectedSpecialty === s
+                            ? "border-accent bg-accent/20 text-accent"
+                            : "border-white/10 bg-white/[0.06] text-text-on-dark hover:border-accent/30 hover:bg-accent/10"
+                        }`}
+                      >
+                        {s}
+                      </button>
+                    ))}
+                  </div>
+                  {/* "Kita" option */}
+                  <div className="mt-3 flex items-center justify-center gap-2">
+                    <input
+                      type="text"
+                      value={otherText}
+                      onChange={(e) => setOtherText(e.target.value.slice(0, 50))}
+                      placeholder="Kita specialybė..."
+                      className="w-48 rounded-lg border border-white/10 bg-white/[0.06] px-3 py-2.5 text-sm text-text-on-dark placeholder:text-text-on-dark-secondary/40 outline-none focus:border-accent/40"
+                    />
+                    <button
+                      onClick={() => {
+                        if (!otherText.trim()) return;
+                        setSelectedSpecialty("Kita");
+                        setSpecialtySaved(true);
+                        document.cookie = `tz_specialty=1;max-age=${60 * 60 * 24 * 30};path=/;SameSite=Lax`;
+                        fetch("/api/waitlist", {
+                          method: "PATCH",
+                          headers: { "Content-Type": "application/json" },
+                          body: JSON.stringify({ email, specialty: "Kita", specialtyOther: otherText.trim() }),
+                        });
+                      }}
+                      className="rounded-lg border border-white/10 bg-white/[0.06] px-4 py-2.5 text-sm font-medium text-text-on-dark hover:border-accent/30 hover:bg-accent/10 transition-all duration-200"
+                    >
+                      Siųsti
+                    </button>
+                  </div>
+                </div>
+              ) : (
+                <p className="mt-6 text-sm text-accent">Ačiū! ✓</p>
+              )}
             </div>
           ) : (
             <>
