@@ -54,18 +54,17 @@ export default async function FbPage({
       <section className="relative overflow-hidden bg-bg-primary px-6 pt-20 pb-16 md:pt-28 md:pb-20">
         <div className="mx-auto max-w-2xl text-center hero-stagger">
           <span className="inline-flex items-center rounded-full border border-accent/30 bg-accent/10 px-3 py-1 text-[13px] tracking-wide text-accent">
-            Skaitmeninis darbų pasas
+            Meistrams
           </span>
 
           <h1 className="hero-shimmer mt-5 font-display text-3xl font-bold tracking-tight sm:text-4xl md:text-5xl lg:text-6xl leading-[1.1]">
-            Tavo atlikti darbai.
+            Tavo darbas puikus.
             <br />
-            Patvirtinti klientų.
+            Bet klientai to nemato.
           </h1>
 
           <p className="mt-5 text-base text-text-on-dark-secondary sm:text-lg md:text-xl max-w-lg mx-auto">
-            Profilis, kuriame kiekvienas tavo darbas užfiksuotas ir patvirtintas tikro kliento. Kaip
-            rekomendacija iš lūpų į lūpas — tik internete.
+            Sukurk profilį, kuriame kiekvienas darbas patvirtintas tikro kliento. Siųsk nuorodą vietoj nuotraukų iš galerijos.
           </p>
 
           <div className="mt-8">
