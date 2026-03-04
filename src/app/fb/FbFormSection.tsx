@@ -8,6 +8,7 @@ declare global {
 
 import { useState, useEffect, useRef } from "react";
 import Link from "next/link";
+import { trackEvent } from "@/lib/analytics";
 
 type FormState = "idle" | "loading" | "success" | "error";
 
@@ -36,7 +37,11 @@ export default function FbFormSection({
   const [specialtySaved, setSpecialtySaved] = useState(false);
 
   const sectionRef = useRef<HTMLElement>(null);
+  const hasFocused = useRef(false);
+  const hasTyped = useRef(false);
+  const formInteracted = useRef(false);
   const errorId = "form-error";
+  const formId = "fb_landing_page";
 
   const isValidEmail = (e: string) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(e);
 
@@ -72,6 +77,42 @@ export default function FbFormSection({
     return () => observer.disconnect();
   }, []);
 
+  // Track form abandonment on page leave
+  const abandonFired = useRef(false);
+  useEffect(() => {
+    function fireAbandon() {
+      if (formInteracted.current && !abandonFired.current && formState !== "loading" && formState !== "success") {
+        abandonFired.current = true;
+        trackEvent("form_abandon", { form_id: formId });
+      }
+    }
+    function handleVisibilityChange() {
+      if (document.visibilityState === "hidden") fireAbandon();
+    }
+    document.addEventListener("visibilitychange", handleVisibilityChange);
+    window.addEventListener("beforeunload", fireAbandon);
+    return () => {
+      document.removeEventListener("visibilitychange", handleVisibilityChange);
+      window.removeEventListener("beforeunload", fireAbandon);
+    };
+  }, [formState]);
+
+  function handleFocus() {
+    if (!hasFocused.current) {
+      hasFocused.current = true;
+      formInteracted.current = true;
+      trackEvent("form_focus", { form_id: formId });
+    }
+  }
+
+  function handleEmailChange(e: React.ChangeEvent<HTMLInputElement>) {
+    setEmail(e.target.value);
+    if (!hasTyped.current && e.target.value.length > 0) {
+      hasTyped.current = true;
+      trackEvent("form_input", { form_id: formId });
+    }
+  }
+
   function triggerShake(msg: string) {
     setShakeError(true);
     setErrorMsg(msg);
@@ -81,9 +122,14 @@ export default function FbFormSection({
 
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
+    trackEvent("form_submit_attempt", { form_id: formId });
 
     if (!isValidEmail(email)) {
       triggerShake("Įvesk galiojantį el. paštą");
+      trackEvent("form_validation_error", {
+        form_id: formId,
+        error_type: "invalid_email",
+      });
       return;
     }
 
@@ -118,10 +164,13 @@ export default function FbFormSection({
       document.cookie = `tz_registered=${data.position};max-age=${60 * 60 * 24 * 30};path=/;SameSite=Lax`;
       document.cookie = `tz_email=${encodeURIComponent(email)};max-age=${60 * 60 * 24 * 30};path=/;SameSite=Lax`;
 
+      formInteracted.current = false; // Prevent abandon event
+      trackEvent("form_submit_success", { form_id: formId });
       setFormState("success");
     } catch {
       setFormState("error");
       setErrorMsg("Kažkas nepavyko. Bandyk dar kartą.");
+      trackEvent("form_submit_error", { form_id: formId });
     }
   }
 
@@ -164,6 +213,7 @@ export default function FbFormSection({
                           setSelectedSpecialty(s);
                           setSpecialtySaved(true);
                           document.cookie = `tz_specialty=1;max-age=${60 * 60 * 24 * 30};path=/;SameSite=Lax`;
+                          trackEvent("specialty_selected", { specialty: s });
                           fetch("/api/waitlist", {
                             method: "PATCH",
                             headers: { "Content-Type": "application/json" },
@@ -195,6 +245,10 @@ export default function FbFormSection({
                         setSelectedSpecialty("Kita");
                         setSpecialtySaved(true);
                         document.cookie = `tz_specialty=1;max-age=${60 * 60 * 24 * 30};path=/;SameSite=Lax`;
+                        trackEvent("specialty_selected", {
+                          specialty: "Kita",
+                          specialty_other: otherText.trim(),
+                        });
                         fetch("/api/waitlist", {
                           method: "PATCH",
                           headers: { "Content-Type": "application/json" },
@@ -225,7 +279,8 @@ export default function FbFormSection({
                   <input
                     type="email"
                     value={email}
-                    onChange={(e) => setEmail(e.target.value)}
+                    onFocus={handleFocus}
+                    onChange={handleEmailChange}
                     placeholder="tavo@email.lt"
                     aria-label="El. paštas"
                     aria-describedby={errorMsg ? errorId : undefined}

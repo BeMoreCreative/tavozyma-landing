@@ -22,7 +22,7 @@ export default function CookieNotice() {
     <div className="fixed bottom-0 inset-x-0 z-50 p-4 pointer-events-none">
       <div className="mx-auto max-w-lg pointer-events-auto rounded-xl border border-border-dark bg-bg-secondary/95 backdrop-blur-lg px-5 py-3.5 shadow-lg flex items-center gap-4">
         <p className="text-xs text-text-on-dark-secondary leading-relaxed">
-          Ši svetainė naudoja tik būtinuosius techninius slapukus.{" "}
+          Ši svetainė naudoja būtinuosius, analitinius ir rinkodaros slapukus.{" "}
           <Link
             href="/privatumo-politika"
             className="text-accent underline underline-offset-2 hover:text-accent-hover transition-colors duration-200"

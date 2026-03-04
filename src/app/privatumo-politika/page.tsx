@@ -36,7 +36,7 @@ export default function PrivatumoPolitika() {
           Privatumo politika
         </h1>
         <p className="mt-3 text-sm text-text-on-dark-secondary">
-          Paskutinį kartą atnaujinta: 2026 m. vasario 21 d.
+          Paskutinį kartą atnaujinta: 2026 m. kovo 4 d.
         </p>
 
         <div className="mt-12 space-y-10 text-base leading-relaxed text-text-on-dark-secondary font-body">
@@ -141,6 +141,60 @@ export default function PrivatumoPolitika() {
                 registracijos duomenims saugoti. Duomenys saugomi ES regione.
                 Šis paslaugų teikėjas tvarko duomenis tik pagal mūsų
                 nurodymus ir privalo laikytis BDAR reikalavimų.
+              </li>
+              <li>
+                <span className="text-text-on-dark">
+                  Google LLC (Google Analytics 4)
+                </span>{" "}
+                &mdash; naudojame Google Analytics svetainės lankomumo
+                statistikai rinkti. Google tvarko anoniminius naudojimo
+                duomenis (puslapių peržiūros, sesijos trukmė, sąveika su
+                formomis). Duomenys gali būti perduodami į JAV pagal
+                standartines sutarčių sąlygas (SCC).{" "}
+                <a
+                  href="https://policies.google.com/privacy"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-accent underline underline-offset-2 hover:text-accent-hover transition-colors duration-200"
+                >
+                  Google privatumo politika
+                </a>
+                .
+              </li>
+              <li>
+                <span className="text-text-on-dark">
+                  Microsoft Corporation (Clarity)
+                </span>{" "}
+                &mdash; naudojame Microsoft Clarity svetainės naudojimo
+                analizei (šilumos žemėlapiai, sesijų įrašai, paspaudimų
+                analizė). Clarity nerenka asmenį identifikuojančios
+                informacijos. Duomenys gali būti perduodami į JAV pagal SCC.{" "}
+                <a
+                  href="https://privacy.microsoft.com/privacystatement"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-accent underline underline-offset-2 hover:text-accent-hover transition-colors duration-200"
+                >
+                  Microsoft privatumo politika
+                </a>
+                .
+              </li>
+              <li>
+                <span className="text-text-on-dark">
+                  Meta Platforms, Inc. (Meta Pixel)
+                </span>{" "}
+                &mdash; naudojame Meta Pixel reklamos efektyvumui matuoti.
+                Meta tvarko anoniminius konversijų duomenis. Duomenys gali
+                būti perduodami į JAV pagal SCC.{" "}
+                <a
+                  href="https://www.facebook.com/privacy/policy/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-accent underline underline-offset-2 hover:text-accent-hover transition-colors duration-200"
+                >
+                  Meta privatumo politika
+                </a>
+                .
               </li>
               <li>
                 <span className="text-text-on-dark">
@@ -266,16 +320,66 @@ export default function PrivatumoPolitika() {
             <h2 className="mb-4 font-display text-xl font-semibold text-text-on-dark">
               9. Slapukai (Cookies)
             </h2>
-            <p>
-              Šiuo metu Svetainė naudoja tik{" "}
-              <span className="text-text-on-dark">
-                būtinuosius techninius slapukus
-              </span>
-              , kurie reikalingi tinkamam svetainės veikimui užtikrinti. Šie
-              slapukai nerenka jokios asmenį identifikuojančios informacijos ir
-              yra automatiškai ištrinami uždarius naršyklę arba pasibaigus
-              sesijai. Analitinių ar rinkodaros slapukų nenaudojame.
+            <p className="mb-3">
+              Svetainė naudoja šių tipų slapukus:
             </p>
+
+            <h3 className="mt-4 mb-2 text-base font-semibold text-text-on-dark">
+              Būtinieji techniniai slapukai
+            </h3>
+            <p className="mb-2">
+              Reikalingi tinkamam svetainės veikimui. Nereikalauja sutikimo.
+            </p>
+            <ul className="list-disc space-y-1 pl-6">
+              <li>
+                <span className="text-text-on-dark">tz_registered</span>,{" "}
+                <span className="text-text-on-dark">tz_email</span>,{" "}
+                <span className="text-text-on-dark">tz_specialty</span>{" "}
+                &mdash; registracijos būsenos išsaugojimas (30 d.)
+              </li>
+              <li>
+                <span className="text-text-on-dark">cookie-notice-dismissed</span>{" "}
+                &mdash; slapukų pranešimo būsena (localStorage)
+              </li>
+            </ul>
+
+            <h3 className="mt-4 mb-2 text-base font-semibold text-text-on-dark">
+              Analitiniai slapukai
+            </h3>
+            <p className="mb-2">
+              Padeda suprasti, kaip lankytojai naudojasi svetaine.
+            </p>
+            <ul className="list-disc space-y-1 pl-6">
+              <li>
+                <span className="text-text-on-dark">Google Analytics 4</span>{" "}
+                &mdash; slapukai <span className="text-text-on-dark">_ga</span>,{" "}
+                <span className="text-text-on-dark">_ga_*</span> (iki 2 m.).
+                Renka anoniminius duomenis apie puslapių peržiūras, sesijų
+                trukmę ir sąveiką su svetaine.
+              </li>
+              <li>
+                <span className="text-text-on-dark">Microsoft Clarity</span>{" "}
+                &mdash; slapukai <span className="text-text-on-dark">_clck</span>,{" "}
+                <span className="text-text-on-dark">_clsk</span> (iki 1 m.).
+                Renka anoniminius duomenis apie paspaudimus, slinkimą ir
+                sesijų įrašus.
+              </li>
+            </ul>
+
+            <h3 className="mt-4 mb-2 text-base font-semibold text-text-on-dark">
+              Rinkodaros slapukai
+            </h3>
+            <p className="mb-2">
+              Naudojami reklamos efektyvumui matuoti.
+            </p>
+            <ul className="list-disc space-y-1 pl-6">
+              <li>
+                <span className="text-text-on-dark">Meta Pixel</span>{" "}
+                &mdash; slapukai <span className="text-text-on-dark">_fbp</span>,{" "}
+                <span className="text-text-on-dark">_fbc</span> (iki 90 d.).
+                Matuoja Facebook / Instagram reklamų konversijas.
+              </li>
+            </ul>
           </section>
 
           {/* 10 */}

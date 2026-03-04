@@ -6,9 +6,10 @@ declare global {
   }
 }
 
-import { useState } from "react";
+import { useState, useRef, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
+import { trackEvent } from "@/lib/analytics";
 
 type FormState = "idle" | "loading" | "error";
 
@@ -26,16 +27,71 @@ export default function WaitlistForm({
   const [shakeError, setShakeError] = useState(false);
   const [errorMsg, setErrorMsg] = useState("");
 
+  const hasFocused = useRef(false);
+  const hasTyped = useRef(false);
+  const formInteracted = useRef(false);
+
+  const formId = id || "unknown";
+
   const isValidEmail = (e: string) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(e);
+
+  // Track form abandonment on page leave
+  const abandonFired = useRef(false);
+  useEffect(() => {
+    function fireAbandon() {
+      if (formInteracted.current && !abandonFired.current && state !== "loading") {
+        abandonFired.current = true;
+        trackEvent("form_abandon", { form_id: formId });
+      }
+    }
+    function handleVisibilityChange() {
+      if (document.visibilityState === "hidden") fireAbandon();
+    }
+    document.addEventListener("visibilitychange", handleVisibilityChange);
+    window.addEventListener("beforeunload", fireAbandon);
+    return () => {
+      document.removeEventListener("visibilitychange", handleVisibilityChange);
+      window.removeEventListener("beforeunload", fireAbandon);
+    };
+  }, [formId, state]);
+
+  function handleFocus() {
+    if (!hasFocused.current) {
+      hasFocused.current = true;
+      formInteracted.current = true;
+      trackEvent("form_focus", { form_id: formId });
+    }
+  }
+
+  function handleEmailChange(e: React.ChangeEvent<HTMLInputElement>) {
+    setEmail(e.target.value);
+    if (!hasTyped.current && e.target.value.length > 0) {
+      hasTyped.current = true;
+      trackEvent("form_input", { form_id: formId });
+    }
+  }
+
+  function handleConsentChange(e: React.ChangeEvent<HTMLInputElement>) {
+    setConsent(e.target.checked);
+    trackEvent("consent_toggle", {
+      form_id: formId,
+      checked: e.target.checked,
+    });
+  }
 
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
+    trackEvent("form_submit_attempt", { form_id: formId });
 
     if (!isValidEmail(email)) {
       setShakeError(true);
       setErrorMsg("Įveskite teisingą el. paštą.");
       setTimeout(() => setShakeError(false), 300);
       setTimeout(() => setErrorMsg(""), 2000);
+      trackEvent("form_validation_error", {
+        form_id: formId,
+        error_type: "invalid_email",
+      });
       return;
     }
 
@@ -44,6 +100,10 @@ export default function WaitlistForm({
       setErrorMsg("Turite sutikti su privatumo politika.");
       setTimeout(() => setShakeError(false), 300);
       setTimeout(() => setErrorMsg(""), 2000);
+      trackEvent("form_validation_error", {
+        form_id: formId,
+        error_type: "no_consent",
+      });
       return;
     }
 
@@ -69,10 +129,13 @@ export default function WaitlistForm({
 
       if (!res.ok) throw new Error();
 
+      formInteracted.current = false; // Prevent abandon event
+      trackEvent("form_submit_success", { form_id: formId });
       router.push("/aciu");
     } catch {
       setState("error");
       setErrorMsg("Kažkas nepavyko. Bandykite dar kartą.");
+      trackEvent("form_submit_error", { form_id: formId });
     }
   }
 
@@ -84,7 +147,8 @@ export default function WaitlistForm({
         <input
           type="email"
           value={email}
-          onChange={(e) => setEmail(e.target.value)}
+          onFocus={handleFocus}
+          onChange={handleEmailChange}
           placeholder="jusu@email.lt"
           aria-label="El. paštas"
           className={`w-full rounded-xl sm:rounded-r-none px-4 py-3.5 text-base outline-none transition-all duration-200 ${
@@ -107,7 +171,7 @@ export default function WaitlistForm({
         <input
           type="checkbox"
           checked={consent}
-          onChange={(e) => setConsent(e.target.checked)}
+          onChange={handleConsentChange}
           className={`mt-0.5 h-4 w-4 shrink-0 rounded border appearance-none cursor-pointer transition-all duration-200 ${
             isDark
               ? "border-white/20 bg-white/[0.06] checked:bg-accent checked:border-accent"
