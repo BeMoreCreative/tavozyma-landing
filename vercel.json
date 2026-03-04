@@ -1,0 +1,9 @@
+{
+  "redirects": [
+    {
+      "source": "/((?!fb|api|aciu|privatumo-politika|_next).*)",
+      "destination": "/fb",
+      "permanent": false
+    }
+  ]
+}
