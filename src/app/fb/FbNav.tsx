@@ -34,7 +34,7 @@ export default function FbNav() {
         onClick={smoothScroll}
         className="rounded-full border border-accent/30 bg-accent/10 px-3.5 py-1.5 text-xs font-medium text-accent transition-all duration-200 hover:bg-accent/20 hover:border-accent/50 sm:px-5 sm:py-2 sm:text-sm"
       >
-        Registruotis nemokamai
+        Užsiregistruok pirmas
       </a>
     </header>
   );

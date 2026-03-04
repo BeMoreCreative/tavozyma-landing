@@ -72,10 +72,10 @@ export default async function FbPage({
               href="#registracija"
               className="inline-block rounded-xl bg-accent px-8 py-4 text-base font-semibold text-bg-primary transition-all duration-200 hover:bg-accent-hover hover:scale-[1.02] active:scale-[0.98]"
             >
-              Užsiregistruoti nemokamai
+              Užsiregistruok pirmas
             </a>
             <p className="mt-2.5 text-[13px] text-text-on-dark-secondary/50">
-              Nemokama &middot; Be įsipareigojimų
+              Nemokamai &middot; Pranešime, kai bus paruošta
             </p>
           </div>
 
@@ -133,7 +133,7 @@ export default async function FbPage({
               href="#registracija"
               className="inline-flex items-center gap-1.5 text-sm font-medium text-accent hover:text-accent-hover transition-colors duration-200"
             >
-              Išspręsk tai per 10 sekundžių ↓
+              Žiūrėk, kaip tai veikia ↓
             </a>
           </div>
         </div>
@@ -251,7 +251,7 @@ export default async function FbPage({
               href="#registracija"
               className="inline-block rounded-xl bg-accent px-8 py-4 text-base font-semibold text-bg-primary transition-all duration-200 hover:bg-accent-hover hover:scale-[1.02] active:scale-[0.98]"
             >
-              Sukurk savo profilį — nemokamai
+              Užsiregistruok pirmas
             </a>
           </div>
         </div>

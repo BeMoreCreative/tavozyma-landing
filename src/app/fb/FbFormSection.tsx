@@ -208,7 +208,7 @@ export default function FbFormSection({
             onClick={smoothScrollToForm}
             className="block w-full rounded-xl bg-accent py-3.5 text-center text-sm font-semibold text-bg-primary transition-all duration-200 hover:bg-accent-hover active:scale-[0.98]"
           >
-            Užsiregistruoti — nemokamai
+            Užsiregistruok pirmas
           </a>
         </div>
       </div>
