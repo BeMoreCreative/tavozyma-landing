@@ -1,28 +1,28 @@
 @import "tailwindcss";
 
 :root {
-  --bg-primary: #0A0A0F;
-  --bg-secondary: #111118;
+  --bg-primary: #FFFFFF;
+  --bg-secondary: #F5F5F7;
   --bg-light: #FAFAFA;
   --bg-light-card: #FFFFFF;
-  --bg-card: #16161F;
-  --bg-card-hover: #1C1C28;
+  --bg-card: #FFFFFF;
+  --bg-card-hover: #F9FAFB;
 
-  --text-on-dark: #F5F5F7;
-  --text-on-dark-secondary: #8E8E9A;
-  --text-on-light: #0A0A0F;
+  --text-on-dark: #1A1A2E;
+  --text-on-dark-secondary: #6B7280;
+  --text-on-light: #1A1A2E;
   --text-on-light-secondary: #6B7280;
 
-  --accent: #10B981;
-  --accent-dim: rgba(16, 185, 129, 0.10);
-  --accent-glow: rgba(16, 185, 129, 0.20);
-  --accent-hover: #34D399;
+  --accent: #F59E0B;
+  --accent-dim: rgba(245, 158, 11, 0.10);
+  --accent-glow: rgba(245, 158, 11, 0.20);
+  --accent-hover: #D97706;
 
-  --border-dark: rgba(255, 255, 255, 0.06);
-  --border-light: rgba(10, 10, 15, 0.06);
+  --border-dark: rgba(0, 0, 0, 0.08);
+  --border-light: rgba(0, 0, 0, 0.06);
 
-  --glass-bg: rgba(255, 255, 255, 0.03);
-  --glass-border: rgba(255, 255, 255, 0.07);
+  --glass-bg: rgba(255, 255, 255, 0.70);
+  --glass-border: rgba(0, 0, 0, 0.08);
 
   --error: #EF4444;
 
@@ -30,9 +30,9 @@
   --font-body: var(--font-inter), 'Inter', system-ui, sans-serif;
   --font-logo: var(--font-nunito), 'Nunito', sans-serif;
 
-  --shadow-glow: 0 0 60px rgba(16, 185, 129, 0.08);
-  --shadow-card: 0 1px 2px rgba(0,0,0,0.3), 0 4px 16px rgba(0,0,0,0.2);
-  --shadow-card-hover: 0 4px 24px rgba(0,0,0,0.3), 0 0 40px rgba(16,185,129,0.05);
+  --shadow-glow: 0 0 60px rgba(245, 158, 11, 0.08);
+  --shadow-card: 0 1px 3px rgba(0,0,0,0.08), 0 4px 16px rgba(0,0,0,0.06);
+  --shadow-card-hover: 0 4px 24px rgba(0,0,0,0.1), 0 0 40px rgba(245,158,11,0.05);
 }
 
 @theme inline {
@@ -72,7 +72,7 @@ body {
 
 ::selection {
   background: var(--accent);
-  color: #0A0A0F;
+  color: #FFFFFF;
 }
 
 /* Animations */
@@ -211,6 +211,8 @@ body {
   -webkit-text-fill-color: transparent;
 }
 
+/* Reduced-motion: show solid text */
+
 /* Hero staggered fade-in */
 @keyframes hero-fade-in {
   from {
@@ -283,9 +285,9 @@ input[type="checkbox"].checked\:bg-accent:checked {
 
 /* Green glow flash — one-shot, settles to subtle halo */
 @keyframes wl-confirm-flash {
-  0% { box-shadow: 0 0 0 0 rgba(16, 185, 129, 0); }
-  40% { box-shadow: 0 0 32px 12px rgba(16, 185, 129, 0.15); }
-  100% { box-shadow: 0 0 20px 6px rgba(16, 185, 129, 0.06); }
+  0% { box-shadow: 0 0 0 0 rgba(245, 158, 11, 0); }
+  40% { box-shadow: 0 0 32px 12px rgba(245, 158, 11, 0.15); }
+  100% { box-shadow: 0 0 20px 6px rgba(245, 158, 11, 0.06); }
 }
 .wl-confirm-glow {
   animation: wl-confirm-flash 0.8s cubic-bezier(0.16, 1, 0.3, 1) both;
@@ -331,6 +333,36 @@ input[type="checkbox"].checked\:bg-accent:checked {
   animation: wl-detail-in 0.3s cubic-bezier(0.16, 1, 0.3, 1) 250ms both;
 }
 
+/* Glow pulse for interactive elements */
+@keyframes glow-pulse {
+  0%, 100% {
+    box-shadow: 0 0 0 0 rgba(245, 158, 11, 0);
+    border-color: rgba(0, 0, 0, 0.08);
+  }
+  50% {
+    box-shadow: 0 0 20px 4px rgba(245, 158, 11, 0.15), 0 0 6px 1px rgba(245, 158, 11, 0.1);
+    border-color: rgba(245, 158, 11, 0.3);
+  }
+}
+.animate-glow-pulse {
+  animation: glow-pulse 2s ease-in-out infinite;
+}
+
+/* Info panel entrance — fade + slide */
+@keyframes info-panel-in {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+.info-panel-in {
+  animation: info-panel-in 350ms cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
 /* Glassmorphism utility */
 .glass {
   background: var(--glass-bg);
@@ -347,7 +379,7 @@ input[type="checkbox"].checked\:bg-accent:checked {
   .hero-shimmer,
   .hero-stagger > .hero-shimmer {
     animation: none;
-    -webkit-text-fill-color: var(--text-on-dark);
+    -webkit-text-fill-color: var(--text-on-light);
   }
   .hero-stagger > * {
     opacity: 1;
@@ -365,10 +397,18 @@ input[type="checkbox"].checked\:bg-accent:checked {
   .wl-track, .wl-slide {
     transition: none;
   }
+  .animate-glow-pulse {
+    animation: none;
+  }
   .wl-badge-pop, .wl-confirm-glow, .wl-pending-glow, .wl-reminder-in, .wl-bell-wiggle, .wl-detail-in {
     animation: none;
   }
   .wl-reminder-in, .wl-detail-in {
+    opacity: 1;
+    transform: none;
+  }
+  .info-panel-in {
+    animation: none;
     opacity: 1;
     transform: none;
   }

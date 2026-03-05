@@ -32,6 +32,8 @@ export default function FbFormSection({
   const [errorMsg, setErrorMsg] = useState("");
   const [position, setPosition] = useState(initialCount);
   const [showSticky, setShowSticky] = useState(false);
+  const [scrollingUp, setScrollingUp] = useState(true);
+  const lastScrollY = useRef(0);
   const [selectedSpecialty, setSelectedSpecialty] = useState<string | null>(null);
   const [otherText, setOtherText] = useState("");
   const [specialtySaved, setSpecialtySaved] = useState(false);
@@ -75,6 +77,17 @@ export default function FbFormSection({
 
     observer.observe(el);
     return () => observer.disconnect();
+  }, []);
+
+  // Hide on scroll down, show on scroll up
+  useEffect(() => {
+    const onScroll = () => {
+      const y = window.scrollY;
+      setScrollingUp(y < lastScrollY.current && y > 400);
+      lastScrollY.current = y;
+    };
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
   // Track form abandonment on page leave
@@ -179,7 +192,7 @@ export default function FbFormSection({
     sectionRef.current?.scrollIntoView({ behavior: "smooth" });
   }
 
-  const stickyVisible = showSticky && formState !== "success";
+  const stickyVisible = showSticky && scrollingUp && formState !== "success";
 
   return (
     <>
@@ -222,8 +235,8 @@ export default function FbFormSection({
                         }}
                         className={`rounded-lg border px-4 py-2.5 text-sm font-medium transition-all duration-200 ${
                           selectedSpecialty === s
-                            ? "border-accent bg-accent/20 text-accent"
-                            : "border-white/10 bg-white/[0.06] text-text-on-dark hover:border-accent/30 hover:bg-accent/10"
+                            ? "border-accent bg-accent/20 text-amber-700"
+                            : "border-gray-200 bg-gray-50 text-text-on-dark hover:border-accent/30 hover:bg-accent/10"
                         }`}
                       >
                         {s}
@@ -237,7 +250,7 @@ export default function FbFormSection({
                       value={otherText}
                       onChange={(e) => setOtherText(e.target.value.slice(0, 50))}
                       placeholder="Kita specialybė..."
-                      className="w-48 rounded-lg border border-white/10 bg-white/[0.06] px-3 py-2.5 text-sm text-text-on-dark placeholder:text-text-on-dark-secondary/40 outline-none focus:border-accent/40"
+                      className="w-48 rounded-lg border border-gray-200 bg-gray-50 px-3 py-2.5 text-sm text-text-on-dark placeholder:text-text-on-dark-secondary/40 outline-none focus:border-accent/40"
                     />
                     <button
                       onClick={() => {
@@ -255,14 +268,14 @@ export default function FbFormSection({
                           body: JSON.stringify({ email, specialty: "Kita", specialtyOther: otherText.trim() }),
                         });
                       }}
-                      className="rounded-lg border border-white/10 bg-white/[0.06] px-4 py-2.5 text-sm font-medium text-text-on-dark hover:border-accent/30 hover:bg-accent/10 transition-all duration-200"
+                      className="rounded-lg border border-gray-200 bg-gray-50 px-4 py-2.5 text-sm font-medium text-text-on-dark hover:border-accent/30 hover:bg-accent/10 transition-all duration-200"
                     >
                       Siųsti
                     </button>
                   </div>
                 </div>
               ) : (
-                <p className="mt-6 text-sm text-accent">Ačiū! ✓</p>
+                <p className="mt-6 text-sm text-amber-700">Ačiū! ✓</p>
               )}
             </div>
           ) : (
@@ -284,7 +297,7 @@ export default function FbFormSection({
                     placeholder="tavo@email.lt"
                     aria-label="El. paštas"
                     aria-describedby={errorMsg ? errorId : undefined}
-                    className={`w-full rounded-xl sm:rounded-r-none px-4 py-3.5 text-base outline-none transition-all duration-200 bg-white/[0.06] border border-white/[0.1] text-text-on-dark placeholder:text-text-on-dark-secondary/40 focus:border-accent/40 focus:ring-2 focus:ring-accent/10 ${
+                    className={`w-full rounded-xl sm:rounded-r-none px-4 py-3.5 text-base outline-none transition-all duration-200 bg-gray-50 border border-gray-200 text-text-on-dark placeholder:text-text-on-dark-secondary/40 focus:border-accent/40 focus:ring-2 focus:ring-accent/10 ${
                       shakeError ? "animate-shake border-error!" : ""
                     }`}
                   />
@@ -297,12 +310,12 @@ export default function FbFormSection({
                   </button>
                 </div>
 
-                <p className="mt-3 text-xs leading-relaxed text-text-on-dark-secondary/60 text-center">
+                <p className="mt-3 text-xs leading-relaxed text-text-on-dark-secondary text-center">
                   Jokio spam&apos;o. Informuosime tik kai produktas bus paruoštas.{" "}
                   <Link
                     href="/privatumo-politika"
                     target="_blank"
-                    className="text-text-on-dark-secondary/40 underline underline-offset-2 hover:text-text-on-dark-secondary/60 transition-colors duration-200"
+                    className="text-text-on-dark-secondary underline underline-offset-2 hover:text-text-on-dark transition-colors duration-200"
                   >
                     Privatumo politika
                   </Link>
